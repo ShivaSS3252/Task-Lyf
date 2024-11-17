@@ -26,6 +26,9 @@ app.use((err, req, res, next) => {
     message: err.message,
   });
 });
+app.get("/", (req, res) => {
+  res.send("Hello World from TaskLyf!");
+});
 
 //5)Server
 const PORT = 8000;
