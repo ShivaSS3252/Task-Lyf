@@ -4,16 +4,17 @@ const cors = require("cors");
 const authRouter = require("./routes/authRoute");
 const taskRouter = require("./routes/taskRoute");
 const app = express();
-
+require("dotenv").config();
 //1)Middlewares
 app.use(express.json());
 app.use(cors());
 //2)Route
 app.use("/api/auth", authRouter);
 app.use("/api", taskRouter);
+
 //3)MONGODb connection
 mongoose
-  .connect("mongodb://localhost:27017/tasklyf")
+  .connect(process.env.MONGO_URI)
   .then(() => console.log("Mongo DB Connected"))
   .catch((error) => console.error("Failed to connect mongo DB", error));
 //4)global error handler
