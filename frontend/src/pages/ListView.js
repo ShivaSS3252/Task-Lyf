@@ -22,14 +22,14 @@ import { toast } from "react-toastify";
 
 const ListView = () => {
   const dispatch = useDispatch();
-  const { tasks, loading, error } = useSelector((state) => state.tasks);
+  const { tasks } = useSelector((state) => state.tasks);
   const { userData } = useAuth();
 
   const [open, setopen] = useState(false);
   const [edit, setEdit] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedTask, setSelectedTask] = useState(null);
-  const [placement, setPlacement] = useState("bottom-end");
+
   const [statusFilter, setStatusFilter] = useState("");
   const [priorityFilter, setPriorityFilter] = useState("");
 
@@ -125,7 +125,7 @@ const ListView = () => {
           <Popper
             open={selectedTask === params.row._id}
             anchorEl={anchorEl}
-            placement={placement}
+            placement={"bottom-end"}
             transition
             sx={{
               zIndex: 10,
