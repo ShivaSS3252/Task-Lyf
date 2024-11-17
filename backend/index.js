@@ -7,7 +7,12 @@ const app = express();
 require("dotenv").config();
 //1)Middlewares
 app.use(express.json());
-app.use(cors());
+const corsOptions = {
+  origin: "https://tasklyf.onrender.com", // Update with your frontend URL
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE"],
+};
+app.use(cors(corsOptions));
 //2)Route
 app.use("/api/auth", authRouter);
 app.use("/api", taskRouter);
