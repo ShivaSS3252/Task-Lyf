@@ -1,0 +1,19 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Prevent padding/border from causing overflow */
+  font-family: "Times New Roman", Times, serif;
+}
+
+body {
+  background-color: #faf9f6;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.container {
+  width: 100%;
+  max-width: 1920px; /* Restrict content to 1920px width on large screens */
+  /* Center the content */
+}
