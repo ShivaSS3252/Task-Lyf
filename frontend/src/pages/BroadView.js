@@ -18,7 +18,7 @@ const BroadView = () => {
   const { userData } = useAuth();
   const [edit, setEdit] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
-  const { tasks, loading, error } = useSelector((state) => state.tasks);
+  const { tasks } = useSelector((state) => state.tasks);
   const [open, setopen] = useState(false);
   const [columns, setColumns] = useState({
     ToDo: [],

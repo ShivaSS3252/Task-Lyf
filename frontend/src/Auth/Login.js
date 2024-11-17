@@ -7,7 +7,6 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { theme } from "../App";
 import worklaptop from "../assets/worklaptop.jpg";
-import SnackbarAlert from "./SnackbarAlert";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { toast } from "react-toastify";
@@ -16,7 +15,6 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const [open, setOpen] = useState(false);
 
   const handleTogglePassword = () => setShowPassword(!showPassword);
 
@@ -66,14 +64,11 @@ const Login = () => {
               if (data.status === "Success" || data.status === "success") {
                 toast.success("LoggedIn successfully!");
                 login(data.token, data.user);
-                setOpen(true);
                 resetForm();
               } else if (data.status === "fail") {
                 toast.error(data.message);
-                setOpen(true);
               } else {
                 toast.error(data.message);
-                setOpen(true);
               }
             })
             .catch((error) => {

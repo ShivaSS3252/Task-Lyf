@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Button,
   Box,
@@ -16,7 +16,7 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import * as Yup from "yup";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import { addTask, fetchTasks, updateTask } from "../actions/taskActions"; // Adjust this path based on your project structure
 import { useAuth } from "../contexts/AuthContext";

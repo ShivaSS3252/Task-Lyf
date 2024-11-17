@@ -8,7 +8,6 @@ import * as Yup from "yup";
 import { theme } from "../App";
 import { useAuth } from "../contexts/AuthContext";
 import worklaptop from "../assets/worklaptop.jpg";
-import SnackbarAlert from "./SnackbarAlert";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -17,7 +16,6 @@ const Register = () => {
   const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [open, setOpen] = useState(false);
 
   const handleTogglePassword = () => setShowPassword(!showPassword);
   const handleToggleConfirmPassword = () =>
@@ -72,14 +70,11 @@ const Register = () => {
               if (data.status === "Success" || data.status === "success") {
                 toast.success(data.message);
                 login(data.token, data.user);
-                setOpen(true);
                 resetForm();
               } else if (data.status === "fail") {
                 toast.error(data.message);
-                setOpen(true);
               } else {
                 toast.error(data.message);
-                setOpen(true);
               }
             })
             .catch((error) => {
