@@ -148,7 +148,6 @@ function Dashboard() {
                 display: "block",
                 mx: 4,
                 fontWeight: "bold",
-                display: "flex",
                 alignItems: "center",
               }}
             >
@@ -166,7 +165,6 @@ function Dashboard() {
                 display: "block",
                 mx: 4,
                 fontWeight: "bold",
-                display: "flex",
                 alignItems: "center",
               }}
             >
