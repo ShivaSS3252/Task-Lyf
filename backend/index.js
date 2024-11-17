@@ -26,6 +26,9 @@ app.use((err, req, res, next) => {
     message: err.message,
   });
 });
+const path = require("path");
+
+app.use(express.static(path.join(__dirname, "build")));
 app.get("/", (req, res) => {
   res.send("Hello World from TaskLyf!");
 });
