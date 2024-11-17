@@ -50,8 +50,8 @@ const Login = () => {
         validationSchema={validationSchema}
         onSubmit={(values, { resetForm }) => {
           const { email, password } = values;
-
-          fetch("http://localhost:8000/api/auth/login", {
+          const API_URL = process.env.REACT_APP_API_URL;
+          fetch(`${API_URL}/api/auth/login`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

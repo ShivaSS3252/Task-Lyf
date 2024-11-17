@@ -90,6 +90,7 @@ const BroadView = () => {
       const updatedTask = { _id: draggedTask._id, status: newStatus };
       console.log("updatedTask", updatedTask);
       await dispatch(updateTask(updatedTask));
+      toast.success("Task Updated Successfully");
       dispatch(fetchTasks(userData._id)); // Re-fetch tasks after updating
     } else {
       // If staying in the same column, reorder items within the column

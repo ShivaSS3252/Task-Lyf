@@ -12,11 +12,11 @@ import {
   updateTaskSuccess,
   updateTaskFail,
 } from "../slices/taskSlice";
-
+const API_URL = process.env.REACT_APP_API_URL;
 export const fetchTasks = (userId) => async (dispatch) => {
   dispatch(fetchTasksRequest());
   try {
-    const response = await fetch("/api/alltasks", {
+    const response = await fetch(`${API_URL}/api/alltasks`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export const fetchTasks = (userId) => async (dispatch) => {
 export const addTask = (taskData) => async (dispatch) => {
   dispatch(addTaskRequest());
   try {
-    const response = await fetch("/api/addtask", {
+    const response = await fetch(`${API_URL}/api/addtask`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -60,7 +60,7 @@ export const addTask = (taskData) => async (dispatch) => {
 export const deleteTask = (taskId) => async (dispatch) => {
   dispatch(deleteTaskRequest());
   try {
-    const response = await fetch("/api/deletetask", {
+    const response = await fetch(`${API_URL}/api/deletetask`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -82,7 +82,7 @@ export const deleteTask = (taskId) => async (dispatch) => {
 export const updateTask = (taskData) => async (dispatch) => {
   dispatch(updateTaskRequest());
   try {
-    const response = await fetch("/api/updateTask", {
+    const response = await fetch(`${API_URL}/api/updateTask`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
