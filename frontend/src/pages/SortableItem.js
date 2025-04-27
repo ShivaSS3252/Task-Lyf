@@ -11,7 +11,7 @@ import {
   Fade,
 } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-
+import { useTheme } from "../contexts/ThemeContext";
 export const SortableItem = ({ id, content, openEditModal, handleDelete }) => {
   const {
     attributes,
@@ -23,7 +23,7 @@ export const SortableItem = ({ id, content, openEditModal, handleDelete }) => {
   } = useSortable({ id });
 
   const [anchorEl, setAnchorEl] = useState(null); // Track anchorEl state uniquely for each item
-
+  const { darkMode } = useTheme();
   const style = {
     transform: CSS.Transform.toString(transform),
     transition:
@@ -72,7 +72,7 @@ export const SortableItem = ({ id, content, openEditModal, handleDelete }) => {
         <div
           style={{
             fontWeight: "bold",
-            backgroundColor: "#000000",
+            backgroundColor: "#121212",
             color: "#ffffff",
             padding: "5px",
             borderRadius: "5px",
@@ -102,7 +102,12 @@ export const SortableItem = ({ id, content, openEditModal, handleDelete }) => {
       {/* Action Button */}
       <IconButton
         size="small"
-        style={{ position: "absolute", top: "10px", right: "10px" }}
+        style={{
+          position: "absolute",
+          top: "10px",
+          right: "10px",
+          color: "black",
+        }}
         onClick={handleButtonClick} // Prevent dragging on button click
       >
         <MoreVertIcon />
@@ -126,6 +131,7 @@ export const SortableItem = ({ id, content, openEditModal, handleDelete }) => {
                       handleClickAway();
                       openEditModal(content); // Open the edit modal for the specific task
                     }}
+                    sx={{ color: darkMode ? "#ffffff" : "#121212" }}
                   >
                     Edit
                   </MuiMenuItem>
@@ -134,6 +140,7 @@ export const SortableItem = ({ id, content, openEditModal, handleDelete }) => {
                       handleClickAway();
                       handleDelete(content._id); // Handle delete for the specific task
                     }}
+                    sx={{ color: darkMode ? "#ffffff" : "#121212" }}
                   >
                     Delete
                   </MuiMenuItem>

@@ -33,7 +33,7 @@ const BroadView = () => {
     if (userData?._id) {
       dispatch(fetchTasks(userData._id));
     }
-  }, [dispatch, userData]);
+  }, []);
 
   useEffect(() => {
     // Dynamically update columns based on tasks
@@ -44,7 +44,7 @@ const BroadView = () => {
     };
     setColumns(updatedColumns);
     console.log("tasksbroad", updatedColumns);
-  }, [tasks]);
+  }, []);
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);

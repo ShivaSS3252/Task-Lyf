@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
       setuserData(user);
       setisAuthenticated(true);
     }
-  }, [storedData]);
+  }, []);
   const login = (newToken, newData) => {
     localStorage.setItem(
       "user_data",

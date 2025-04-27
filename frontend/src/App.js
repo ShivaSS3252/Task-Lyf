@@ -1,4 +1,3 @@
-// App.js
 import "./App.css";
 import React from "react";
 import {
@@ -7,7 +6,7 @@ import {
   Routes,
   Navigate,
 } from "react-router-dom";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { ThemeProvider } from "./contexts/ThemeContext"; // ✅ Use custom ThemeProvider
 import Register from "./Auth/Register";
 import Login from "./Auth/Login";
 import Dashboard from "./pages/Dashboard";
@@ -17,25 +16,11 @@ import ListView from "./pages/ListView";
 import BroadView from "./pages/BroadView";
 import ChartView from "./pages/ChartView";
 
-// Create a Material-UI compatible theme
-export const theme = createTheme({
-  palette: {
-    primary: { main: "#3498db" },
-    secondary: { main: "#2ecc71" },
-    background: { default: "#cbdbff" },
-    text: { primary: "#333333" },
-    accent: { main: "#e74c3c" },
-  },
-  typography: {
-    fontFamily: "Times New Roman, Times, serif",
-  },
-});
-
 function App() {
   const { isAuthenticated } = useAuth();
   console.log("isAuthenticated", isAuthenticated);
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider>
       <Box className="container">
         <Router>
           <Routes>

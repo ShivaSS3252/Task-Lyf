@@ -5,13 +5,14 @@ import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Grid from "@mui/material/Grid2";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { theme } from "../App";
+import { useTheme } from "../contexts/ThemeContext";
 import { useAuth } from "../contexts/AuthContext";
 import worklaptop from "../assets/worklaptop.jpg";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const Register = () => {
+  const { theme, darkMode, toggleTheme } = useTheme();
   const navigate = useNavigate();
   const { login } = useAuth();
   const [showPassword, setShowPassword] = useState(false);
@@ -37,8 +38,8 @@ const Register = () => {
       sx={{
         boxShadow: 3,
         flexGrow: 1,
-        bgcolor: "#FFFFFF",
-        color: theme.palette.text.primary,
+        bgcolor: darkMode ? "#121212" : "#FFFFFF",
+        color: darkMode ? "#ffffff" : "#333333",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -88,7 +89,7 @@ const Register = () => {
               <Grid item size={{ xs: 12, md: 6 }}>
                 <Typography
                   sx={{
-                    color: "#000000",
+                    color: darkMode ? "#FFFFFF" : "#000000",
                     fontWeight: "bolder",
                     fontSize: "30px",
                   }}
@@ -107,6 +108,17 @@ const Register = () => {
                     required
                     error={touched.name && Boolean(errors.name)}
                     helperText={<ErrorMessage name="name" />}
+                    InputProps={{
+                      sx: {
+                        "& input::placeholder": {
+                          color: darkMode ? "#FFFFFF" : "#333333", // Placeholder color
+                          opacity: 1,
+                        },
+                        "& input": {
+                          color: darkMode ? "#FFFFFF" : "#333333", // Typing text color
+                        },
+                      },
+                    }}
                   />
                 </Grid>
 
@@ -121,6 +133,17 @@ const Register = () => {
                     required
                     error={touched.email && Boolean(errors.email)}
                     helperText={<ErrorMessage name="email" />}
+                    InputProps={{
+                      sx: {
+                        "& input::placeholder": {
+                          color: darkMode ? "#FFFFFF" : "#333333", // Placeholder color
+                          opacity: 1,
+                        },
+                        "& input": {
+                          color: darkMode ? "#FFFFFF" : "#333333", // Typing text color
+                        },
+                      },
+                    }}
                   />
                 </Grid>
                 <Grid item size={{ xs: 12 }} sx={{ py: 1 }}>
@@ -145,6 +168,15 @@ const Register = () => {
                           )}
                         </IconButton>
                       ),
+                      sx: {
+                        "& input::placeholder": {
+                          color: darkMode ? "#FFFFFF" : "#333333", // Placeholder color
+                          opacity: 1,
+                        },
+                        "& input": {
+                          color: darkMode ? "#FFFFFF" : "#333333", // Typing text color
+                        },
+                      },
                     }}
                   />
                 </Grid>
@@ -177,6 +209,15 @@ const Register = () => {
                           )}
                         </IconButton>
                       ),
+                      sx: {
+                        "& input::placeholder": {
+                          color: darkMode ? "#FFFFFF" : "#333333", // Placeholder color
+                          opacity: 1,
+                        },
+                        "& input": {
+                          color: darkMode ? "#FFFFFF" : "#333333", // Typing text color
+                        },
+                      },
                     }}
                   />
                 </Grid>
@@ -191,16 +232,25 @@ const Register = () => {
                       alignItems: "center",
                     }}
                   >
-                    <Button variant="contained" size="medium" type="submit">
+                    <Button
+                      variant={darkMode ? "text" : "contained"}
+                      size="medium"
+                      type="submit"
+                    >
                       Register
                     </Button>
                     <Box sx={{ display: "inline" }}>
-                      <Typography sx={{ color: "#180161", display: "inline" }}>
+                      <Typography
+                        sx={{
+                          color: darkMode ? "#63C5DA" : "#180161",
+                          display: "inline",
+                        }}
+                      >
                         Already a member?{" "}
                       </Typography>
                       <Typography
                         sx={{
-                          color: "#180161",
+                          color: darkMode ? "#48AAAD" : "#180161",
                           cursor: "pointer",
                           display: "inline",
                           ":hover": { color: "#eb3678" },

@@ -5,8 +5,9 @@ import React, { useEffect } from "react";
 import { useAuth } from "../contexts/AuthContext";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchTasks } from "../actions/taskActions";
-
+import { useTheme } from "../contexts/ThemeContext";
 export default function ChartView() {
+  const { darkMode } = useTheme();
   const dispatch = useDispatch();
   const { tasks } = useSelector((state) => state.tasks);
   const { userData } = useAuth();
@@ -15,7 +16,7 @@ export default function ChartView() {
     if (userData?._id) {
       dispatch(fetchTasks(userData._id));
     }
-  }, [dispatch, userData]);
+  }, []);
 
   // Compute the status counts dynamically
   const statusCounts = useMemo(() => {
@@ -38,6 +39,9 @@ export default function ChartView() {
         top: "90%",
         left: "center",
         orient: "horizontal",
+        textStyle: {
+          color: darkMode ? "#FFFFFF" : "#121212", // White legend text color
+        },
       },
       series: [
         {
@@ -100,7 +104,7 @@ export default function ChartView() {
           <Grid item xs={6} sm={4} md={3} key={index}>
             <Box
               sx={{
-                backgroundColor: "#ffffff",
+                backgroundColor: darkMode ? "#2c3e4c" : "#ffffff",
                 borderRadius: "10px",
                 boxShadow: "0 4px 15px rgba(0, 0, 0, 0.1)",
                 padding: "20px",
@@ -115,7 +119,13 @@ export default function ChartView() {
                 },
               }}
             >
-              <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: "bold",
+                  color: darkMode ? "#ffffff" : "black",
+                }}
+              >
                 {item.name}
               </Typography>
               <Typography
@@ -142,7 +152,7 @@ export default function ChartView() {
       <Box
         sx={{
           flex: 1,
-          backgroundColor: "white",
+          backgroundColor: darkMode ? "#2c3e4c" : "#ffffff",
           borderRadius: "10px",
           boxShadow: "0 4px 20px rgba(0, 0, 0, 0.1)",
           transition: "transform 0.3s ease, box-shadow 0.3s ease",

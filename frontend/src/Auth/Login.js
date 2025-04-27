@@ -1,17 +1,26 @@
 import React, { useState } from "react";
-import { Box, Typography, Button, TextField, IconButton } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Button,
+  TextField,
+  IconButton,
+  CircularProgress,
+} from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import Grid from "@mui/material/Grid2";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { theme } from "../App";
+import { useTheme } from "../contexts/ThemeContext";
 import worklaptop from "../assets/worklaptop.jpg";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import { toast } from "react-toastify";
 
 const Login = () => {
+  const { theme, darkMode, toggleTheme } = useTheme();
+  const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
@@ -30,10 +39,8 @@ const Login = () => {
       sx={{
         boxShadow: 3,
         flexGrow: 1,
-        bgcolor: "#FFFFFF",
-        color: theme.palette.text.primary,
-        // px: 10,
-        // py: 5,
+        bgcolor: darkMode ? "#121212" : "#FFFFFF",
+        color: darkMode ? "#ffffff" : "#333333",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -49,6 +56,7 @@ const Login = () => {
         onSubmit={(values, { resetForm }) => {
           const { email, password } = values;
           const API_URL = process.env.REACT_APP_API_URL;
+          setLoading(true);
           fetch(`${API_URL}/api/auth/login`, {
             method: "POST",
             headers: {
@@ -60,6 +68,7 @@ const Login = () => {
               return response.json();
             })
             .then((data) => {
+              setLoading(false);
               console.log("datad", data);
               if (data.status === "Success" || data.status === "success") {
                 toast.success("LoggedIn successfully!");
@@ -72,6 +81,7 @@ const Login = () => {
               }
             })
             .catch((error) => {
+              setLoading(false);
               console.error("Fetch error:", error);
             });
         }}
@@ -82,7 +92,7 @@ const Login = () => {
               <Grid item size={{ xs: 12, md: 6 }}>
                 <Typography
                   sx={{
-                    color: "#000000",
+                    color: darkMode ? "#FFFFFF" : "#000000",
                     fontWeight: "bolder",
                     fontSize: "30px",
                   }}
@@ -101,6 +111,17 @@ const Login = () => {
                     required
                     error={touched.email && Boolean(errors.email)}
                     helperText={<ErrorMessage name="email" />}
+                    InputProps={{
+                      sx: {
+                        "& input::placeholder": {
+                          color: darkMode ? "#FFFFFF" : "#333333", // Placeholder color
+                          opacity: 1,
+                        },
+                        "& input": {
+                          color: darkMode ? "#FFFFFF" : "#333333", // Typing text color
+                        },
+                      },
+                    }}
                   />
                 </Grid>
                 <Grid item size={{ xs: 12 }} sx={{ py: 1 }}>
@@ -125,6 +146,15 @@ const Login = () => {
                           )}
                         </IconButton>
                       ),
+                      sx: {
+                        "& input::placeholder": {
+                          color: darkMode ? "#FFFFFF" : "#333333", // Placeholder color
+                          opacity: 1,
+                        },
+                        "& input": {
+                          color: darkMode ? "#FFFFFF" : "#333333", // Typing text color
+                        },
+                      },
                     }}
                   />
                 </Grid>
@@ -139,16 +169,29 @@ const Login = () => {
                       alignItems: "center",
                     }}
                   >
-                    <Button variant="contained" size="medium" type="submit">
-                      Login
+                    <Button
+                      variant={darkMode ? "text" : "contained"}
+                      size="medium"
+                      type="submit"
+                      disabled={loading} // Disable the button when loading
+                      startIcon={
+                        loading ? <CircularProgress size={20} /> : null
+                      }
+                    >
+                      {loading ? "Logging in..." : "Login"}
                     </Button>
                     <Box sx={{ display: "inline" }}>
-                      <Typography sx={{ color: "#180161", display: "inline" }}>
+                      <Typography
+                        sx={{
+                          color: darkMode ? "#63C5DA" : "#180161",
+                          display: "inline",
+                        }}
+                      >
                         New User?{" "}
                       </Typography>
                       <Typography
                         sx={{
-                          color: "#180161",
+                          color: darkMode ? "#48AAAD" : "#180161",
                           cursor: "pointer",
                           display: "inline",
                           ":hover": { color: "#eb3678" },

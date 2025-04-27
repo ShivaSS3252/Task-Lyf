@@ -19,8 +19,9 @@ import {
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { DataGrid } from "@mui/x-data-grid";
 import { toast } from "react-toastify";
-
+import { useTheme } from "../contexts/ThemeContext";
 const ListView = () => {
+  const { darkMode } = useTheme();
   const dispatch = useDispatch();
   const { tasks } = useSelector((state) => state.tasks);
   const { userData } = useAuth();
@@ -61,8 +62,23 @@ const ListView = () => {
             variant="filled"
             sx={{
               "& .MuiSelect-select": {
-                padding: "2px 12px",
+                padding: "2px 22px",
                 lineHeight: 3,
+                backgroundColor: darkMode ? "#2c3e4c" : "#efefef",
+                color: darkMode ? "#ffffff" : "#121212", // Text color inside Select
+              },
+            }}
+            MenuProps={{
+              PaperProps: {
+                sx: {
+                  backgroundColor: darkMode ? "#2c3e50" : "#ffffff", // Background for dropdown
+                  "& .MuiMenuItem-root": {
+                    color: darkMode ? "#ffffff" : "#121212", // Text color for all menu items
+                    "&:hover": {
+                      backgroundColor: darkMode ? "#1a252f" : "#dddddd", // Hover effect
+                    },
+                  },
+                },
               },
             }}
           >
@@ -88,8 +104,23 @@ const ListView = () => {
             variant="filled"
             sx={{
               "& .MuiSelect-select": {
-                padding: "2px 12px",
+                padding: "2px 22px",
                 lineHeight: 3,
+                backgroundColor: darkMode ? "#2c3e4c" : "#efefef",
+                color: darkMode ? "#ffffff" : "#121212", // Text color inside Select
+              },
+            }}
+            MenuProps={{
+              PaperProps: {
+                sx: {
+                  backgroundColor: darkMode ? "#2c3e50" : "#ffffff", // Background for dropdown
+                  "& .MuiMenuItem-root": {
+                    color: darkMode ? "#ffffff" : "#121212", // Text color for all menu items
+                    "&:hover": {
+                      backgroundColor: darkMode ? "#1a252f" : "#dddddd", // Hover effect
+                    },
+                  },
+                },
               },
             }}
           >
@@ -136,10 +167,16 @@ const ListView = () => {
                 <Paper>
                   <ClickAwayListener onClickAway={handleClickAway}>
                     <MenuList>
-                      <MuiMenuItem onClick={() => handleEdit(params.row)}>
+                      <MuiMenuItem
+                        onClick={() => handleEdit(params.row)}
+                        sx={{ color: darkMode ? "#ffffff" : "#121212" }}
+                      >
                         Edit
                       </MuiMenuItem>
-                      <MuiMenuItem onClick={() => handleDelete(params.row._id)}>
+                      <MuiMenuItem
+                        onClick={() => handleDelete(params.row._id)}
+                        sx={{ color: darkMode ? "#ffffff" : "#121212" }}
+                      >
                         Delete
                       </MuiMenuItem>
                     </MenuList>
@@ -233,11 +270,29 @@ const ListView = () => {
               "& .MuiSelect-select": {
                 padding: "2px 22px",
                 lineHeight: 2,
-                backgroundColor: "#efefef",
+                backgroundColor: darkMode ? "#2c3e4c" : "#efefef",
+                color: darkMode ? "#ffffff" : "#121212", // Text color inside Select
+              },
+            }}
+            MenuProps={{
+              PaperProps: {
+                sx: {
+                  backgroundColor: darkMode ? "#2c3e50" : "#ffffff", // Background for dropdown
+                  "& .MuiMenuItem-root": {
+                    color: darkMode ? "#ffffff" : "#121212", // Text color for all menu items
+                    "&:hover": {
+                      backgroundColor: darkMode ? "#1a252f" : "#dddddd", // Hover effect
+                    },
+                  },
+                },
               },
             }}
           >
-            <MenuItem value="">All Status</MenuItem>
+            <MenuItem value="">
+              <span style={{ color: darkMode ? "#ffffff" : "#121212" }}>
+                All Status
+              </span>
+            </MenuItem>
             {["To Do", "In Progress", "Completed"].map((status) => (
               <MenuItem key={status} value={status}>
                 {status}
@@ -256,11 +311,29 @@ const ListView = () => {
               "& .MuiSelect-select": {
                 padding: "2px 22px",
                 lineHeight: 2,
-                backgroundColor: "#efefef",
+                backgroundColor: darkMode ? "#2c3e4c" : "#efefef",
+                color: darkMode ? "#ffffff" : "#121212", // Text color inside Select
+              },
+            }}
+            MenuProps={{
+              PaperProps: {
+                sx: {
+                  backgroundColor: darkMode ? "#2c3e50" : "#ffffff", // Background for dropdown
+                  "& .MuiMenuItem-root": {
+                    color: darkMode ? "#ffffff" : "#121212", // Text color for all menu items
+                    "&:hover": {
+                      backgroundColor: darkMode ? "#1a252f" : "#dddddd", // Hover effect
+                    },
+                  },
+                },
               },
             }}
           >
-            <MenuItem value="">All Priority</MenuItem>
+            <MenuItem value="">
+              <span style={{ color: darkMode ? "#ffffff" : "#121212" }}>
+                All Priority
+              </span>
+            </MenuItem>
             {["Low", "Medium", "High"].map((priority) => (
               <MenuItem key={priority} value={priority}>
                 {priority}
@@ -291,6 +364,9 @@ const ListView = () => {
             },
             "& .MuiDataGrid-columnHeaderTitle": {
               color: "white",
+            },
+            "& .MuiDataGrid-row": {
+              color: darkMode ? "#ffffff" : "#000000", // Text color for all rows
             },
           }}
         />
