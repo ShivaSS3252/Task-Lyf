@@ -18,7 +18,6 @@ import ChartView from "./pages/ChartView";
 
 function App() {
   const { isAuthenticated } = useAuth();
-  console.log("isAuthenticated", isAuthenticated);
   return (
     <ThemeProvider>
       <Box className="container">

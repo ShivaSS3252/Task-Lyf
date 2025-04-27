@@ -69,7 +69,6 @@ const Login = () => {
             })
             .then((data) => {
               setLoading(false);
-              console.log("datad", data);
               if (data.status === "Success" || data.status === "success") {
                 toast.success("LoggedIn successfully!");
                 login(data.token, data.user);

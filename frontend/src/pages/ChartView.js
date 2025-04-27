@@ -29,7 +29,7 @@ export default function ChartView() {
       value: count,
     }));
   }, [tasks]);
-  console.log("statusCounts", statusCounts);
+
   const chartOptions = useMemo(
     () => ({
       tooltip: {

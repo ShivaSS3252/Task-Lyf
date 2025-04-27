@@ -43,7 +43,6 @@ const BroadView = () => {
       Completed: tasks.filter((task) => task.status === "Completed"),
     };
     setColumns(updatedColumns);
-    console.log("tasksbroad", updatedColumns);
   }, []);
 
   useEffect(() => {
@@ -88,7 +87,6 @@ const BroadView = () => {
 
       // Dispatch action to update the task status in the backend
       const updatedTask = { _id: draggedTask._id, status: newStatus };
-      console.log("updatedTask", updatedTask);
       await dispatch(updateTask(updatedTask));
       toast.success("Task Updated Successfully");
       dispatch(fetchTasks(userData._id)); // Re-fetch tasks after updating
@@ -134,7 +132,6 @@ const BroadView = () => {
     }),
   };
   const openEditModal = (taskId) => {
-    console.log("taskiddata", taskId);
     setEdit(true);
     setSelectedTask(taskId); // Set the selected task ID for editing
     setopen(true); // Open the modal
@@ -145,7 +142,6 @@ const BroadView = () => {
     dispatch(fetchTasks(userData._id));
     toast.success("Task deleted successfully!");
   };
-  console.log("openEditModal function in BroadView:", openEditModal);
 
   return (
     <>
@@ -183,7 +179,6 @@ const BroadView = () => {
                     handleDelete={handleDelete}
                   />
                 ))}
-                {console.log("columniddata", columnId)}
               </SortableContext>
             </Droppable>
           ))}

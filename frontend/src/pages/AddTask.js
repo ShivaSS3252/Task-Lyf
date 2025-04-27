@@ -25,7 +25,6 @@ import { useTheme } from "../contexts/ThemeContext";
 
 const AddTask = (props) => {
   const { darkMode } = useTheme();
-  console.log("addprops", props);
   const { open, setopen, taskId, edit, setEdit } = props;
   const dispatch = useDispatch();
   const { userData } = useAuth();
@@ -344,7 +343,6 @@ const AddTask = (props) => {
                   >
                     {edit ? "Edit Task" : "Add Task"}
                   </Button>
-                  {console.log("addeddata", values)}
                 </DialogActions>
               </Form>
             )}

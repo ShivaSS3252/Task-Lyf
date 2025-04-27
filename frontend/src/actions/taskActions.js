@@ -90,7 +90,6 @@ export const updateTask = (taskData) => async (dispatch) => {
       body: JSON.stringify(taskData),
     });
     const data = await response.json();
-    console.log("Sending task data:", taskData, data);
     if (data.success) {
       dispatch(updateTaskSuccess(data.task));
     } else {

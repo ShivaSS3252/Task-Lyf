@@ -30,7 +30,6 @@ function Dashboard() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [activePage, setActivePage] = React.useState("ChartView"); // State to track active page
   const { logout, userData } = useAuth();
-  console.log("userData", userData.name.slice(0, 1));
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
